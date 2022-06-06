@@ -3,6 +3,20 @@
 <div id="stocks">
   <% @stocks.each do |stock| %>
     <% if stock.user_id == current_user.id %>
+
+    <% if stock.ticker == "" %>
+     <% @nothing = "Please enter a ticker Symbol" %>
+    <% elsif stock.ticker %>
+      <%begin
+        @stock = StockQuote::Stock.quote(stock.ticker)
+      rescue
+        @stock == 'Unknown symbol'
+      ensure
+        @error = "Please enter a valid stock ticker"
+      end %>
+    <% end %>
+
+
       <%= render stock %>
       <p>
         <%= link_to "Show this stock", stock %>
@@ -10,6 +24,7 @@
     <% end %>
   <% end %>
 </div>
+
 
 <%= link_to "New stock", new_stock_path %>
 

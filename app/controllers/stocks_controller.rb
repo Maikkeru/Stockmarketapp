@@ -2,8 +2,7 @@ class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
-
+  @api = StockQuote::Stock.new(api_key: "pk_153e93f4bce64c3d87e7d4d3510153ed")
 
 
   # GET /stocks or /stocks.json
@@ -13,6 +12,7 @@ class StocksController < ApplicationController
 
   # GET /stocks/1 or /stocks/1.json
   def show
+    @stocks = Stock.all
   end
 
   # GET /stocks/new

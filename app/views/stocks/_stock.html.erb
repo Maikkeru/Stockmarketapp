@@ -1,9 +1,40 @@
-<div id="<%= dom_id stock %>">
-  <p>
-    <strong>Ticker:</strong>
-    <%= stock.ticker.upcase %>
-  </p>
 
+  <% @stock= StockQuote::Stock.quote(stock.ticker) %>
 
+  <div id="<%= dom_id stock %>">
+    <p>
+      <strong>Ticker:</strong>
+      <%= @stock.symbol %>
+    </p>
+    <p>
+      <strong>Open</strong>
+     $<%= @stock.open %>
+    </p>
+    <p>
+      <strong>Price</strong>
+     $<%= @stock.latest_price %>
+    </p>
+    <p>
+      <strong>Close</strong>
+     $<%= @stock.close %>
+    </p>
+    <p>
+      <strong>Company Name</strong>
+      <%= @stock.company_name %>
+    </p>
+    <p>
+      <strong>Primary Exchange</strong>
+      <%= @stock.primary_exchange %>
+    </p>
+    <p>
+      <strong>Volume</strong>
+      <%= number_with_delimiter(@stock.volume, :delimiter => ',') %>
+    </p>
+    <p>
+      <strong>Market Cap</strong>
+      $<%= number_with_delimiter(@stock.market_cap, :delimiter => ',') %>
+    </p>
+    
 
-</div>
+  </div>
+
